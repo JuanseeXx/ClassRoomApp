@@ -1,22 +1,37 @@
 package com.example.APIClassRoom.models;
 
 import com.example.APIClassRoom.herlpers.TypeUser;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "Users")
 public class User {
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_User")
+    private Integer idUser;
+
+    @Column(nullable = false, length = 100)
     private String name;
+
+    @Column(nullable = false, unique = true, length = 150)
     private String email;
+
+    @Column(nullable = false, length = 255)
     private String password;
+
+    @Column(length = 20)
     private String telephone;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "User_Type", nullable = false)
     private TypeUser typeUser;
 
     public User() {
     }
 
     public User(Integer id, String name, String email, String password, String telephone, TypeUser typeUser) {
-        this.id = id;
+        this.idUser = id;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -25,11 +40,11 @@ public class User {
     }
 
     public Integer getId() {
-        return id;
+        return idUser;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idUser = id;
     }
 
     public String getName() {
